@@ -69,6 +69,7 @@ Ensure you have the following installed:
 
 ## Project Structure
 
+```
 student-entry/
 │
 ├── src/
@@ -109,7 +110,7 @@ student-entry/
 ├── tsconfig.json # TypeScript configuration
 └── README.md # Project documentation
 
-````
+```
 
 ## Usage
 
@@ -135,6 +136,8 @@ Contributions are welcome! Please follow these steps:
 2. Create a feature branch:
    ```bash
    git checkout -b feature-name
+   ```
+
 ````
 
 3. Commit your changes:
@@ -170,3 +173,4 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+````
