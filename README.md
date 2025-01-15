@@ -67,6 +67,50 @@ Ensure you have the following installed:
    http://localhost:4200
    ```
 
+## Project Structure
+
+student-entry/
+│
+├── src/
+│ ├── app/
+│ │ ├── core/ # Core modules and services
+│ │ │ ├── guards/ # Route guards
+│ │ │ ├── interceptors/ # HTTP interceptors
+│ │ │ └── services/ # Shared services
+| | | |──api.service.ts
+| | | └──auth.service.ts
+│ │ ├── features/ # Feature modules
+│ │ │ ├── login/ # Login module
+│ │ │ ├── dashboard/ # Dashboard module
+│ │ │ └── student-crud/ # Student CRUD operations
+| | ├── services/
+│ | └── student.service.ts # Handles HTTP calls for student data
+│ | |
+│ │ └── state/ # State management (NgRx)
+│ | ├── actions/
+│ │ | └── student.actions.ts # Defines actions for student state
+│ | ├── effects/
+│ │ | └── student.effects.ts # Handles side effects (e.g., API calls)
+│ | ├── reducers/
+│ │ | └── student.reducer.ts # Defines reducer logic for state changes
+│ | ├── selectors/
+│ │ | └── student.selectors.ts # Selectors to query student state
+| │ ├── models/
+| │ └── student-record.model.ts
+│ ├── assets/ # Static assets (images, JSON, etc.)
+│ ├── environments/ # Environment-specific configurations
+│ ├── index.html # Main HTML file
+│ ├── main.ts # Application entry point
+│ ├── polyfills.ts # Polyfills for compatibility
+│ └── styles.scss # Global styles
+│
+├── angular.json # Angular CLI configuration
+├── package.json # Project dependencies and scripts
+├── tsconfig.json # TypeScript configuration
+└── README.md # Project documentation
+
+````
+
 ## Usage
 
 - **Add a Student**: Fill out the form and click **Add** to create a new student record.
@@ -91,8 +135,6 @@ Contributions are welcome! Please follow these steps:
 2. Create a feature branch:
    ```bash
    git checkout -b feature-name
-   ```
-
 ````
 
 3. Commit your changes:
@@ -128,4 +170,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-````
