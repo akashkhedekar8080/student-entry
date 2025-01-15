@@ -1,0 +1,270 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Student Registration Form</mat-card-title>
+      <mat-card-subtitle
+        >Please fill in all required fields marked with *</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        [formGroup]="StudentForm"
+        (ngSubmit)="addStudent()"
+        class="registration-form"
+      >
+        <!-- Personal Information Section -->
+        <section class="form-section">
+          <h2 class="section-title">Personal Information</h2>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                formControlName="name"
+                placeholder="Enter your first name"
+                required
+                [attr.aria-label]="'First Name'"
+                autocomplete="given-name"
+              />
+              @if (isFieldInvalid('name')) {
+              <mat-error>{{ getErrorMessage("name", "First Name") }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                placeholder="Enter your email"
+                required
+                [attr.aria-label]="'Email'"
+                autocomplete="email"
+              />
+              @if (isFieldInvalid('email')) {
+              <mat-error>{{ getErrorMessage("email", "Email") }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                type="tel"
+                formControlName="phone"
+                placeholder="Enter 10-digit phone number"
+                required
+                [attr.aria-label]="'Phone Number'"
+                autocomplete="tel"
+              />
+              <mat-hint>Format: 1234567890</mat-hint>
+              @if (isFieldInvalid('phone')) {
+              <mat-error>{{
+                getErrorMessage("phone", "Phone Number")
+              }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </section>
+
+        <!-- Address Section -->
+        <section class="form-section">
+          <h2 class="section-title">Address Details</h2>
+          <div class="form-grid">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Street Address</mat-label>
+              <input
+                matInput
+                formControlName="street"
+                placeholder="Enter street address"
+                required
+                [attr.aria-label]="'Street Address'"
+                autocomplete="street-address"
+              />
+              @if (isFieldInvalid('street')) {
+              <mat-error>{{
+                getErrorMessage("street", "Street Address")
+              }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input
+                matInput
+                formControlName="city"
+                placeholder="Enter city"
+                required
+                [attr.aria-label]="'City'"
+                autocomplete="address-level2"
+              />
+              @if (isFieldInvalid('city')) {
+              <mat-error>{{ getErrorMessage("city", "City") }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input
+                matInput
+                formControlName="state"
+                placeholder="Enter state"
+                required
+                [attr.aria-label]="'State'"
+                autocomplete="address-level1"
+              />
+              @if (isFieldInvalid('state')) {
+              <mat-error>{{ getErrorMessage("state", "State") }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Postal Code</mat-label>
+              <input
+                matInput
+                formControlName="postalcode"
+                placeholder="Enter postal code"
+                required
+                [attr.aria-label]="'Postal Code'"
+                autocomplete="postal-code"
+              />
+              <mat-hint>Format: 12345 or 12345-6789</mat-hint>
+              @if (isFieldInvalid('postalcode')) {
+              <mat-error>{{
+                getErrorMessage("postalCode", "Postal Code")
+              }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <mat-select
+                formControlName="country"
+                required
+                [attr.aria-label]="'Country'"
+                placeholder="Select your country"
+              >
+                @for (country of countries; track country) {
+                <mat-option [value]="country">{{ country }}</mat-option>
+                }
+              </mat-select>
+              @if (isFieldInvalid('country')) {
+              <mat-error>{{ getErrorMessage("country", "Country") }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </section>
+
+        <!-- Course Information Section -->
+        <section class="form-section">
+          <h2 class="section-title">Course Information</h2>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Course Name</mat-label>
+              <mat-select
+                formControlName="courseName"
+                required
+                [attr.aria-label]="'Course Name'"
+              >
+                @for (course of courses; track course) {
+                <mat-option [value]="course">{{ course }}</mat-option>
+                }
+              </mat-select>
+              @if (isFieldInvalid('courseName')) {
+              <mat-error>{{
+                getErrorMessage("courseName", "Course Name")
+              }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Subjects</mat-label>
+              <mat-select
+                formControlName="subjects"
+                multiple
+                required
+                [attr.aria-label]="'Subjects'"
+              >
+                @for (subject of subjects; track subject) {
+                <mat-option [value]="subject">{{ subject }}</mat-option>
+                }
+              </mat-select>
+              @if (isFieldInvalid('subjects')) {
+              <mat-error>{{
+                getErrorMessage("subjects", "Subjects")
+              }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Start Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="date"
+                required
+                [attr.aria-label]="'Start Date'"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              @if (isFieldInvalid('date')) {
+              <mat-error>{{ getErrorMessage("date", "Start Date") }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </section>
+
+        <!-- Declarations Section -->
+        <section class="form-section">
+          <h2 class="section-title">Declarations</h2>
+          <div class="declarations-grid">
+            <mat-checkbox
+              formControlName="passportDeclaration"
+              required
+              [attr.aria-label]="'Passport Declaration'"
+            >
+              I declare that I have a valid passport
+            </mat-checkbox>
+            @if (isFieldInvalid('passportDeclaration')) {
+            <mat-error class="checkbox-error">
+              {{
+                getErrorMessage("passportDeclaration", "Passport Declaration")
+              }}
+            </mat-error>
+            }
+
+            <mat-checkbox
+              formControlName="fitnessDeclaration"
+              required
+              [attr.aria-label]="'Fitness Declaration'"
+            >
+              I declare that I am physically fit to undertake this course
+            </mat-checkbox>
+            @if (isFieldInvalid('fitnessDeclaration')) {
+            <mat-error class="checkbox-error">
+              {{ getErrorMessage("fitnessDeclaration", "Fitness Declaration") }}
+            </mat-error>
+            }
+          </div>
+        </section>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!StudentForm.valid"
+          >
+            Submit Registration
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

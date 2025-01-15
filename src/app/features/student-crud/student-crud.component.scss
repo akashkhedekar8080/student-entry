@@ -1,0 +1,204 @@
+$primary-color: #3f51b5;
+$error-color: #f44336;
+$text-color: #333;
+$border-radius: 8px;
+$transition-duration: 0.3s;
+$spacing-unit: 1rem;
+
+// Mixins
+@mixin card-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow $transition-duration ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@mixin section-heading {
+  color: $text-color;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: $spacing-unit;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba($primary-color, 0.1);
+}
+
+// Main container styles
+.container {
+  padding: $spacing-unit;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Card styles
+mat-card {
+  @include card-shadow;
+  border-radius: $border-radius;
+  background: #fff;
+
+  mat-card-header {
+    margin-bottom: $spacing-unit * 2;
+
+    mat-card-title {
+      font-size: 1.5rem;
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
+}
+
+// Form styles
+form {
+  .section-heading {
+    @include section-heading;
+    margin-top: $spacing-unit * 2;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // Grid layout
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-unit;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  // Form field styles
+  mat-form-field {
+    width: 100%;
+    margin-bottom: $spacing-unit;
+
+    &.full-width {
+      grid-column: 1 / -1;
+    }
+
+    // Custom styling for outline appearance
+    ::ng-deep {
+      .mat-form-field-outline {
+        background-color: rgba($primary-color, 0.02);
+      }
+
+      .mat-form-field-label {
+        color: rgba($text-color, 0.7);
+      }
+
+      &.mat-focused {
+        .mat-form-field-outline {
+          background-color: rgba($primary-color, 0.05);
+        }
+      }
+    }
+  }
+
+  // Error message styling
+  mat-error {
+    font-size: 0.75rem;
+    color: $error-color;
+    margin-top: 0.25rem;
+  }
+}
+
+// Checkbox styles
+mat-checkbox {
+  display: block;
+  margin-bottom: $spacing-unit;
+
+  ::ng-deep {
+    .mat-checkbox-label {
+      color: $text-color;
+    }
+
+    .mat-checkbox-frame {
+      border-color: rgba($primary-color, 0.5);
+    }
+  }
+}
+
+// Date picker styles
+.mat-datepicker-toggle {
+  color: rgba($primary-color, 0.7);
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+// Select styles
+mat-select {
+  ::ng-deep {
+    .mat-select-value {
+      color: $text-color;
+    }
+
+    .mat-select-arrow {
+      color: rgba($primary-color, 0.7);
+    }
+  }
+}
+
+// Submit button container
+.submit-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-unit * 2;
+
+  button {
+    min-width: 120px;
+
+    &:disabled {
+      opacity: 0.7;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .container {
+    padding: $spacing-unit / 2;
+  }
+
+  mat-card {
+    padding: $spacing-unit;
+  }
+
+  .section-heading {
+    font-size: 1.1rem;
+  }
+}
+
+// Animation for form fields
+.mat-form-field {
+  transition: transform $transition-duration ease;
+
+  &:focus-within {
+    transform: translateY(-2px);
+  }
+}
+
+// Utility classes
+.mb-2 {
+  margin-bottom: $spacing-unit * 2;
+}
+
+.mt-2 {
+  margin-top: $spacing-unit * 2;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.required-field {
+  &::after {
+    content: "*";
+    color: $error-color;
+    margin-left: 4px;
+  }
+}
